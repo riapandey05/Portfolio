@@ -16,37 +16,56 @@
   <meta name="keywords" content="Put your name, skills and some coding keywords" />
   <link rel="stylesheet" href="index.css" />
 </head>
-
 <body>
-
   <!-- ***** Header ***** -->
-
   <header class="header" role="banner" id="top">
     <div class="row">
       <nav class="nav" role="navigation">
         <ul class="nav__items">
-          <li class="nav__item"><a href="#work" class="nav__link">Work</a></li>
-          <li class="nav__item"><a href="#clients" class="nav__link">Clients</a></li>
+          <li class="nav__item"><a href="#work" class="nav__link">About</a></li>
+          <li class="nav__item"><a href="#clients" class="nav__link">Skills</a></li>
           <li class="nav__item">
-            <a href="#about" class="nav__link">About</a>
+            <a href="#about" class="nav__link">Projects</a>
           </li>
           <li class="nav__item">
-            <a href="#contact" class="nav__link">Contact</a>
+            <a href="#contact" class="nav__link">Education</a>
           </li>
         </ul>
       </nav>
     </div>
     <div class="header__text-box row">
       <div class="header__text">
+        <!-- Profile Image Section -->
+        <div class="profile-image">
+          <img src="WhatsApp Image 2025-03-31 at 15.48.35_7fe64854.jpg" alt="Ria Pandey">
+        </div>
+    
         <h1 class="heading-primary">
-          <!-- Replace the following name with your name -->
-          <span>Syed Ali Hussnain</span>
+          <span>Ria Pandey</span>
         </h1>
-        <!-- Put a small paragraph about yourself -->
-        <p>A Web Developer based in Lahore, Pakistan.</p>
+        <p>Machine Learning enthusiast</p>
         <a href="#contact" class="btn btn--pink">Get in touch</a>
       </div>
     </div>
+    
+    <style>
+      .profile-image {
+        display: flex;
+        
+        align-items: center;
+        margin-bottom: 15px;
+      }
+    
+      .profile-image img {
+        width: 200px; /* Adjust size as needed */
+        height: 200px; /* Adjust size as needed */
+        margin-right: 20px; /* Space between image and text */
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #ff3258; /* Optional: Adds a border */
+      }
+    </style>
+
   </header>
 
   <main role="main">
@@ -54,15 +73,56 @@
     <!-- ***** Work ***** -->
 
     <section class="work" id="work">
+       <!-- ***** About Myself ***** -->
+
+<!-- ***** About Myself ***** -->
+
+<section class="about-myself" id="about-myself">
+  <div class="row">
+    <h2>About Myself</h2>
+    <div class="about-myself__content">
+      <div class="about-myself__text">
+        <p>
+          I am a passionate Machine Learning enthusiast with a strong interest in Deep Learning and Natural Language Processing.
+          My journey in technology has led me to work on various projects, ranging from predictive analytics to sentiment analysis.
+          I thrive on solving complex problems and continuously improving my skills in the ever-evolving tech landscape.
+        </p>
+        <p>
+          I believe in lifelong learning and enjoy collaborating on innovative projects that make an impact. 
+          When I'm not coding, I love exploring new technologies, reading research papers, and enhancing my knowledge in AI-driven solutions.
+        </p>
+        <a href="22BCE10466.RESUME.pdf" target="_blank" class="btn btn--pink">Download Resume</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="client" id="clients">
+  <div class="row">
+    <h2>Skills</h2>
+    <div class="client__logos">
+      <!-- Add logos of the clients or companies you'have worked with. -->
+      <img src="./images/ronjones.png" class="client__logo" alt="Company 2" />
+      <img src="./images/goldengrid.png" class="client__logo" alt="Company 3" />
+      <img src="./images/bullseye.png" class="client__logo" alt="Company 1" />
+      <img src="./images/mighty-furnitures.png" class="client__logo" alt="Company 1" />
+      <img src="./images/fastlane.png" class="client__logo" alt="Company 3" />
+      <img src="./images/chippy.png" class="client__logo" alt="Company 1" />
+    </div>
+  </div>
+</section>
+
+
+
+
       <div class="row">
-        <h2>My Work</h2>
+        <h2>Projects</h2>
         <div class="work__boxes">
 
           <!-- Each div with the work__box class is a project. -->
-
+  
           <div class="work__box">
             <div class="work__text">
-              <h3>Projects</h3>
+              <h3>Forest fire prediction system</h3>
               <p>
                 A forest fire prediction system using machine learning is a system that uses various machine learning algorithms 
                 to analyze data related to weather to predict the likelihood of a forest fire in a specific area. The system can help in early detection and prevention of forest fires, ultimately reducing their impact on the environment and human life.
@@ -79,12 +139,12 @@
                   Visit Site <span>&rarr;</span>
                 </a>
                 <a href="https://github.com/riapandey05/NLP.git" title="View Source Code" target="_blank">
-                  <img src="./images/github.svg" class="work__code" alt="GitHub">
+                  <img src="image copy.png" class="work__code" alt="GitHub">
                 </a>
               </div>
             </div>
             <div class="work__image-box">
-              <img src="./images/project-1.png" class="work__image" alt="Project 1" />
+              <img src="image.png" class="work__image" alt="Project 1" />
             </div>
           </div>
 
@@ -108,12 +168,12 @@
                   Visit Site <span>&rarr;</span>
                 </a>
                 <a href="#">
-                  <img src="./images/github.svg" class="work__code" title="View Source Code" alt="GitHub">
+                  <img src="image copy.png" class="work__code" title="View Source Code" alt="GitHub">
                 </a>
               </div>
             </div>
             <div class="work__image-box">
-              <img src="./images/project-2.png" class="work__image" alt="Project 1" />
+              <img src="WhatsApp Image 2025-03-31 at 16.08.59_e910cee9.jpg" class="work__image" alt="Project 1" />
             </div>
           </div>
 
@@ -150,38 +210,36 @@
 
     <!-- ***** Clients ***** -->
 
-    <section class="client" id="clients">
-      <div class="row">
-        <h2>Clients</h2>
-        <div class="client__logos">
-          <!-- Add logos of the clients or companies you'have worked with. -->
-          <img src="./images/ronjones.png" class="client__logo" alt="Company 2" />
-          <img src="./images/goldengrid.png" class="client__logo" alt="Company 3" />
-          <img src="./images/bullseye.png" class="client__logo" alt="Company 1" />
-          <img src="./images/mighty-furnitures.png" class="client__logo" alt="Company 1" />
-          <img src="./images/fastlane.png" class="client__logo" alt="Company 3" />
-          <img src="./images/chippy.png" class="client__logo" alt="Company 1" />
-        </div>
-      </div>
-    </section>
+
 
     <!-- ***** About ***** -->
 
     <section class="about" id="about">
       <div class="row">
-        <h2>About Me</h2>
-        <div class="about__content">
-          <div class="about__text">
-            <!-- Replace the below paragraph with info about yourself -->
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos id
-              nostrum illo harum blanditiis, tenetur eum suscipit cupiditate
-              in vel, ex quam quidem quos mollitia labore aut sunt eius
-              ratione molestiae fuga veniam facere similique voluptate.
-            </p>
-            <!-- Provide a link to your resume -->
-            <a href="#" class="btn">My Resume</a>
+        <h2>Education</h2>
+        <div style="display: flex; justify-content: space-between; align-items: center;  padding: 20px; border-radius: 8px;">
+          <!-- School Section (Left) -->
+          <div style="width: 45%; text-align: left;">
+            <h3 style="color: #e63946;">Undergraduation</h3>
+            <p><strong>Rajkumar College ,Raipur(Chhattisgarh)</strong></p>
+            <p>Secondary(2020): <strong>94%</strong></p>
+            <p>Higher Secondary(2022): <strong>95%</strong></p>
           </div>
+          
+          <!-- College Section (Right) -->
+          <div style="width: 45%; text-align: right;">
+            <h3 style="color: #e63946;">Graduation</h3>
+            <p><strong>VIT Bhopal University</strong></p>
+            <p>Degree: <strong>B.Tech in CSE</strong></p>
+            <p>CGPA: <strong>9.12</strong> (Expected 2026)</p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+    
+
+        
 
           <div class="about__photo-container">
             <!-- Add a nice photo of yourself -->
@@ -199,15 +257,13 @@
       <h2>Get in Touch</h2>
       <div class="contact__info">
         <p>
-          Are you looking for a fast-performing and user-friendly website to
-          represent your product or business? or looking for any kind of
-          consultation? or want to ask questions? or have some advice for me
-          or just want to say "Hi 👋" in any case feel free to Let me know. I
-          will do my best to respond back. 😊 The quickest way to reach out to
-          me is via an email.
+          I am a student at VIT Bhopal University, deeply passionate about Machine Learning,
+          Deep Learning, and Natural Language Processing. I am always eager to explore new 
+          technologies and collaborate on innovative projects. If you’d like to connect or
+          discuss exciting ideas, feel free to reach out to me at this email.
         </p>
         <!-- Replace the email with yours -->
-        <a href="mailto:you@example.com" class="btn">you@example.com</a>
+        <a href="mailto:riapandey0805@gmail.com" class="btn">riapandey0805@gmail.com</a>
       </div>
     </div>
   </section>
@@ -219,30 +275,30 @@
       <!-- Update the links to point to your accounts -->
       <ul class="footer__social-links">
         <li class="footer__social-link-item">
-          <a href="https://twitter.com/nisarhassan12/" title="Link to Twitter Profile">
-            <img src="./images/twitter.svg" class="footer__social-image" alt="Twitter">
+          <a href="https://www.geeksforgeeks.org/user/riapandhc2q/" title="Link to GeeksForGeeks Profile">
+            <img src="images/image.png" class="footer__social-image" alt="GeeksForGeeks">
           </a>
         </li>
         <li class="footer__social-link-item">
-          <a href="https://github.com/nisarhassan12/" title="Link to Github Profile">
-            <img src="./images/github.svg" class="footer__social-image" alt="Github">
+          <a href="https://github.com/riapandey05" title="Link to Github Profile">
+            <img src="image copy.png" class="footer__social-image" alt="Github">
           </a>
         </li>
         <li class="footer__social-link-item">
-          <a href="https://codepen.io/nisar_hassan" title="Link to Codepen Profile">
-            <img src="./images/codepen.svg" class="footer__social-image" alt="Codepen">
+          <a href="https://www.linkedin.com/in/ria-pandey-07b4a2250/" title="Link to Linkedin Profile">
+            <img src="images/image copy.png" class="footer__social-image" alt="LinkedIn">
           </a>
         </li>
         <li class="footer__social-link-item">
-          <a href=https://www.linkedin.com/in/nisar-hassan-naqvi-413466199/">
-            <img src="./images/linkedin.svg" title="Link to Linkedin Profile" class="footer__social-image" alt="Linkedin">
+          <a href=https://leetcode.com/u/_riapandey_/">
+            <img src="image copy 2.png" title="Link to Leetcode Profile" class="footer__social-image" alt="Leetcode">
           </a>
         </li>
       </ul>
 
       <!-- If you give me some credit by keeping the below paragraph, will be huge for me 😊 Thanks. -->
       <p>
-        &copy; 2020 - Template designed & developed by <a href="https://nisar.dev" class="link">Nisar</a>.
+       Thank you</a>
       </p>
       <div class="footer__github-buttons">
         <iframe
