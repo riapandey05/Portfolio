@@ -1,318 +1,833 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" type="image/png" href="./images/favicon.png" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ria Pandey — Machine Learning Engineer</title>
+  <meta name="description" content="Ria Pandey — Machine Learning, NLP, Generative AI, LangChain" />
+  <link rel="icon" href="./images/favicon.png" />
+  <style>
+    /* --------------------
+       Master variables + reset
+       -------------------- */
 
-  <!-- Put your site title here -->
-  <title>
-    Ria Pandey | Machine Learning enthusiast
-  </title>
+    
+    :root{
+      --bg1:#0b0f1a;      /* deep navy */
+      --bg2:#0f0814;      /* near-black */
+      --neon-pink:#ff3b78;
+      --neon-cyan:#00e5ff;
+      --accent-1:linear-gradient(135deg,var(--neon-cyan),var(--neon-pink));
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.02);
+      --muted: #bfc7d4;
+      --glass-border: rgba(255,255,255,0.06);
+      --max-w:1200px;
+      --fw-heading: 'Jost', system-ui, -apple-system, sans-serif;
+      --fw-body: 'Hk Grotesk', system-ui, -apple-system, sans-serif;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:var(--fw-body);
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(0,229,255,0.04), transparent),
+                  radial-gradient(1000px 500px at 90% 90%, rgba(255,59,120,0.04), transparent),
+                  linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:#e8eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      min-height:100vh;
+    }
+    .container{max-width:var(--max-w);margin:0 auto;padding:3rem}
 
-  <meta name="description" content="Add small description of yourslef.">
-  <!-- Add some coding keywords below, Ex: (React, CSS etc) -->
-  <meta name="keywords" content="Put your name, skills and some coding keywords" />
-  <link rel="stylesheet" href="index.css" />
+    /* -------------------- Header / Hero -------------------- */
+    header{display:flex;align-items:center;justify-content:space-between;gap:2rem;padding:2rem 0}
+    .brand{display:flex;align-items:center;gap:1rem}
+    .logo{
+      height:56px;width:56px;border-radius:12px;
+      background:conic-gradient(from 120deg,var(--neon-cyan),var(--neon-pink));
+      box-shadow:0 6px 30px rgba(0,0,0,0.6),0 0 18px rgba(255,59,120,0.08) inset;
+      display:grid;place-items:center;font-weight:700;color:#071021
+    }
+    nav ul{list-style:none;display:flex;gap:1.25rem}
+    nav a{
+      color:#e8eef6;
+      opacity:0.85;
+      text-decoration:none;
+      padding:.55rem 1rem;
+      border-radius:999px;
+      transition:all .18s;
+    }
+    nav a:hover{
+      color:#ffffff;
+      opacity:1;
+      background:linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border:1px solid var(--glass-border);
+      box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    /* CTA pink button */
+    .btn-primary{
+      background:linear-gradient(135deg,var(--neon-cyan),var(--neon-pink));
+      color:#050716;
+      padding:.65rem 1.25rem;
+      border-radius:999px;
+      font-weight:600;
+      border:none;
+      box-shadow:0 10px 30px rgba(0,0,0,0.55);
+      transition:transform .18s,box-shadow .18s,filter .18s;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-size:.95rem;
+    }
+    .btn-primary:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.06);
+      box-shadow:0 18px 40px rgba(0,0,0,0.75);
+    }
+
+    /* -------------------- Hero content -------------------- */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:3rem;align-items:center;padding:4rem 0}
+    .hero .intro h1{font-family:var(--fw-heading);font-size:3.4rem;line-height:1.02;margin-bottom:.6rem;color:linear-gradient(90deg,#fff,#e6f7ff)}
+    .name-gradient{background:var(--accent-1);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero .tagline{font-size:1.6rem;color:var(--muted);margin-bottom:1rem}
+    .typing{display:inline-block;color:var(--neon-cyan);font-weight:700}
+    .hero .badges{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+    .badge{padding:.45rem .75rem;border-radius:999px;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);font-size:.95rem;color:var(--muted)}
+
+    /* profile card */
+    .profile-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid var(--glass-border);padding:1.6rem;border-radius:14px;backdrop-filter: blur(6px);box-shadow:0 10px 40px rgba(2,6,23,0.6);}
+    .profile-card img{
+      width:100%;
+      height:260px;
+      object-fit:cover;
+      object-position:top center; /* ensure face is visible */
+      border-radius:8px;
+      margin-bottom:1rem;
+    }
+    .profile-meta{display:flex;justify-content:space-between;gap:1rem;align-items:center}
+
+    /* -------------------- Glass panels & sections -------------------- */
+    section{margin:4.5rem 0}
+    h2{font-family:var(--fw-heading);font-size:2.6rem;margin-bottom:1rem;color:#fff}
+    .glass{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid var(--glass-border);padding:1.5rem;border-radius:12px}
+
+    /* -------------------- Projects grid -------------------- */
+    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:1rem}
+    .project{display:flex;gap:1rem;align-items:stretch;border-radius:12px;padding:1rem;border:1px solid rgba(255,255,255,0.03);transition:transform .2s,box-shadow .2s}
+    .project:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(2,6,23,0.6)}
+    .project .left{flex:1}
+    .project h3{margin-bottom:.6rem;font-size:1.25rem;color:#fff}
+    .project p{color:var(--muted);font-size:.95rem}
+    .project .meta{margin-top:.8rem;display:flex;gap:.6rem;flex-wrap:wrap}
+    .pill{padding:.35rem .6rem;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);font-size:.85rem;color:var(--muted)}
+    .project .media{
+      width:160px;
+      height:100px;
+      border-radius:8px;
+      overflow:hidden;
+      position:relative;
+      background:#050712;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .project .media img{width:100%;height:100%;object-fit:cover}
+
+    /* ====== RELEVANT ANIMATIONS FOR EACH PROJECT ====== */
+
+    /* 1) Voice-Activated Form Assistant (form fields + pulsing mic) */
+    .media-vafa{
+      background:radial-gradient(circle at 0% 0%, #00e5ff22, transparent 60%),
+                 radial-gradient(circle at 100% 100%, #ff3b7822, transparent 60%),
+                 #050712;
+    }
+    .media-vafa .form-lines{
+      position:absolute;
+      left:10%;
+      right:35%;
+      top:18%;
+      bottom:18%;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .media-vafa .form-lines span{
+      height:8px;
+      border-radius:999px;
+      background:linear-gradient(90deg,rgba(255,255,255,0.16),rgba(0,229,255,0.8));
+      opacity:0.9;
+      transform-origin:left center;
+      animation:lineFill 3s ease-in-out infinite;
+    }
+    .media-vafa .form-lines span:nth-child(2){animation-delay:0.3s;width:80%}
+    .media-vafa .form-lines span:nth-child(3){animation-delay:0.6s;width:65%}
+    .media-vafa .form-lines span:nth-child(4){animation-delay:0.9s;width:90%}
+    .media-vafa .form-lines span:nth-child(1){width:60%}
+    .media-vafa .mic-dot{
+      position:absolute;
+      right:12%;
+      bottom:20%;
+      width:20px;
+      height:20px;
+      border-radius:50%;
+      background:radial-gradient(circle,#ff3b78,#7a1035);
+      box-shadow:0 0 16px rgba(255,59,120,0.9);
+      animation:micPulse 1.8s ease-out infinite;
+    }
+    .media-vafa .mic-stick{
+      position:absolute;
+      right:18%;
+      bottom:18%;
+      width:2px;
+      height:18px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.5);
+    }
+
+    /* 2) ConversoAI — Chatbot (two speech bubbles talking) */
+    .media-converso{
+      background:radial-gradient(circle at 20% 30%, #00e5ff22, transparent 55%),
+                 radial-gradient(circle at 80% 70%, #ff3b7822, transparent 55%),
+                 #050712;
+    }
+    .media-converso .bubble{
+      position:absolute;
+      max-width:70px;
+      padding:6px 10px;
+      border-radius:14px;
+      font-size:9px;
+      line-height:1.3;
+      color:#e8eef6;
+      opacity:0;
+      transform:translateY(6px) scale(0.9);
+      animation:chatAppear 4.2s ease-in-out infinite;
+      white-space:nowrap;
+    }
+    .media-converso .bubble.user{
+      left:8px;
+      bottom:14px;
+      background:rgba(0,229,255,0.15);
+      border:1px solid rgba(0,229,255,0.6);
+      animation-delay:0.2s;
+    }
+    .media-converso .bubble.bot{
+      right:8px;
+      top:12px;
+      background:rgba(255,59,120,0.18);
+      border:1px solid rgba(255,59,120,0.7);
+      animation-delay:1.6s;
+    }
+    .media-converso .typing-dots{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      display:flex;
+      gap:4px;
+    }
+    .media-converso .typing-dots span{
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.4);
+      animation:typingDots 1.2s infinite;
+    }
+    .media-converso .typing-dots span:nth-child(2){animation-delay:0.15s}
+    .media-converso .typing-dots span:nth-child(3){animation-delay:0.3s}
+
+    /* 3) LSTMind – Next Word Predictor (tokens flowing) */
+    .media-lstmind{
+      background:linear-gradient(120deg,#020617,#0b1220);
+      overflow:hidden;
+    }
+    .media-lstmind .token-row{
+      position:absolute;
+      left:-40%;
+      right:-40%;
+      display:flex;
+      gap:6px;
+      font-size:9px;
+      text-transform:uppercase;
+      letter-spacing:0.06em;
+      animation:tokensSlide 6s linear infinite;
+      opacity:0.9;
+    }
+    .media-lstmind .token-row:nth-child(1){
+      top:22%;
+      animation-delay:0s;
+    }
+    .media-lstmind .token-row:nth-child(2){
+      top:48%;
+      animation-delay:1s;
+      opacity:0.8;
+    }
+    .media-lstmind .token-row:nth-child(3){
+      top:74%;
+      animation-delay:2s;
+      opacity:0.7;
+    }
+    .media-lstmind .token{
+      padding:2px 6px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.5);
+      background:rgba(15,23,42,0.9);
+      color:#cbd5f5;
+      white-space:nowrap;
+    }
+    .media-lstmind .token.next{
+      background:linear-gradient(90deg,var(--neon-cyan),var(--neon-pink));
+      color:#020617;
+      border:none;
+      box-shadow:0 0 14px rgba(0,229,255,0.5);
+    }
+
+    /* 4) Forest Fire Prediction (risk bars + heat shimmer) */
+    .media-forest{
+      background:linear-gradient(180deg,#020617,#020617 30%,#111827 80%);
+      overflow:hidden;
+    }
+    .media-forest .bars{
+      position:absolute;
+      bottom:10%;
+      left:12%;
+      right:12%;
+      display:flex;
+      align-items:flex-end;
+      gap:6px;
+    }
+    .media-forest .bar{
+      flex:1;
+      border-radius:4px 4px 0 0;
+      background:linear-gradient(180deg,rgba(0,229,255,0.15),rgba(34,197,94,0.7));
+      height:26px;
+      animation:barPulse 4.5s ease-in-out infinite;
+      transform-origin:bottom center;
+    }
+    .media-forest .bar:nth-child(2){
+      animation-delay:0.4s;
+      background:linear-gradient(180deg,rgba(250,204,21,0.25),rgba(234,179,8,0.8));
+      height:40px;
+    }
+    .media-forest .bar:nth-child(3){
+      animation-delay:0.8s;
+      background:linear-gradient(180deg,rgba(248,113,113,0.3),rgba(220,38,38,0.9));
+      height:60px;
+    }
+    .media-forest .heat{
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      top:0;
+      background:radial-gradient(circle at 50% 100%,rgba(248,113,113,0.45),transparent 60%);
+      opacity:0.6;
+      mix-blend-mode:screen;
+      animation:heatWave 3.6s ease-in-out infinite;
+    }
+
+    /* ====== KEYFRAMES ====== */
+    @keyframes riskFill{
+  0%{width:40%}
+  50%{width:85%}
+  100%{width:60%}
+}
+@keyframes probChange{
+  0%{opacity:0.5; transform:translateX(-50%) scale(1)}
+  50%{opacity:1; transform:translateX(-50%) scale(1.3)}
+  100%{opacity:0.6; transform:translateX(-50%) scale(1)}
+}
+@keyframes pulseDot{
+  0%{transform:scale(0.8);opacity:0.7}
+  50%{transform:scale(1.25);opacity:1}
+  100%{transform:scale(0.8);opacity:0.7}
+}
+    @keyframes lineFill{
+      0%{transform:scaleX(0.2);opacity:0.4}
+      50%{transform:scaleX(1);opacity:1}
+      100%{transform:scaleX(0.6);opacity:0.7}
+    }
+    @keyframes micPulse{
+      0%{transform:scale(0.8);opacity:0.7}
+      50%{transform:scale(1.15);opacity:1}
+      100%{transform:scale(0.8);opacity:0.7}
+    }
+    @keyframes chatAppear{
+      0%{opacity:0;transform:translateY(6px) scale(0.9)}
+      20%{opacity:1;transform:translateY(0) scale(1)}
+      60%{opacity:1;transform:translateY(0) scale(1)}
+      100%{opacity:0;transform:translateY(-4px) scale(0.96)}
+    }
+    @keyframes typingDots{
+      0%,80%,100%{transform:translateY(0);opacity:0.4}
+      40%{transform:translateY(-3px);opacity:1}
+    }
+    @keyframes tokensSlide{
+      0%{transform:translateX(0)}
+      100%{transform:translateX(40%)}
+    }
+    @keyframes barPulse{
+      0%{transform:scaleY(0.9);opacity:0.6}
+      40%{transform:scaleY(1.1);opacity:1}
+      100%{transform:scaleY(0.95);opacity:0.8}
+    }
+    @keyframes heatWave{
+      0%{transform:translateY(4px) scaleY(1.02);opacity:0.4}
+      50%{transform:translateY(-4px) scaleY(1);opacity:0.8}
+      100%{transform:translateY(4px) scaleY(1.02);opacity:0.4}
+    }
+
+    /* single column on mobile */
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      .projects{grid-template-columns:1fr}
+      nav ul{display:none}
+    }
+
+    /* -------------------- Skills bar -------------------- */
+    .skills-grid{display:flex;gap:1rem;flex-wrap:wrap}
+    .skill{flex:1 1 180px;padding:1rem;border-radius:10px;border:1px solid rgba(255,255,255,0.02);background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
+    .skill h4{font-size:1rem;margin-bottom:.6rem;color:#fff}
+    .bar{height:10px;background:var(--glass-2);border-radius:999px;overflow:hidden}
+    .bar > i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--neon-cyan),var(--neon-pink));box-shadow:0 6px 18px rgba(0,229,255,0.06)}
+
+    /* -------------------- Resume CTA / Contact -------------------- */
+    .cta-row{display:flex;gap:1rem;align-items:center;margin-top:1rem}
+    .ghost{
+      padding:.65rem 1.25rem;
+      border-radius:999px;
+      border:1px solid var(--glass-border);
+      background:rgba(15,23,42,0.8);
+      color:var(--muted);
+      text-decoration:none;
+      font-size:.95rem;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      transition:all .18s;
+    }
+    .ghost:hover{
+      color:#e8eef6;
+      border-color:rgba(255,255,255,0.22);
+      background:rgba(15,23,42,0.95);
+      box-shadow:0 12px 30px rgba(0,0,0,0.55);
+    }
+
+    /* footer */
+    footer{padding:2rem 0;border-top:1px solid rgba(255,255,255,0.03);text-align:center;color:var(--muted);font-size:.95rem}
+
+    /* -------------------- Neon animated mesh (subtle) -------------------- */
+    .mesh{position:fixed;left:0;top:0;right:0;bottom:0;z-index:0;pointer-events:none}
+    .mesh svg{width:100%;height:100%;opacity:0.08}
+
+    /* small utilities */
+    .muted{color:var(--muted)}
+    .right{text-align:right}
+    .links{display:flex;gap:.6rem;align-items:center}
+    .link-ghost{
+      padding:.55rem 1.1rem;
+      border-radius:999px;
+      border:1px solid var(--glass-border);
+      background:rgba(15,23,42,0.8);
+      color:var(--muted);
+      text-decoration:none;
+      font-size:.9rem;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      transition:all .18s;
+    }
+    .link-ghost:hover{
+      color:#e8eef6;
+      border-color:rgba(255,255,255,0.22);
+      background:rgba(15,23,42,0.95);
+      box-shadow:0 12px 30px rgba(0,0,0,0.55);
+    }
+
+    /* typing caret */
+    .typing-caret{display:inline-block;width:.8rem;height:1.3rem;background:var(--neon-pink);margin-left:.35rem;animation:blink 1s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+  </style>
 </head>
 <body>
-  <!-- ***** Header ***** -->
-  <header class="header" role="banner" id="top">
-    <div class="row">
-      <nav class="nav" role="navigation">
-        <ul class="nav__items">
-          <li class="nav__item"><a href="#work" class="nav__link">About</a></li>
-          <li class="nav__item"><a href="#clients" class="nav__link">Skills</a></li>
-          <li class="nav__item">
-            <a href="#about" class="nav__link">Projects</a>
-          </li>
-          <li class="nav__item">
-            <a href="#contact" class="nav__link">Education</a>
-          </li>
+  <!-- decorative mesh background (SVG gradient lines) -->
+  <div class="mesh" aria-hidden>
+    <svg preserveAspectRatio="none" viewBox="0 0 1600 900">
+      <defs>
+        <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#00e5ff" stop-opacity="0.14"/><stop offset="1" stop-color="#ff3b78" stop-opacity="0.12"/></linearGradient>
+      </defs>
+      <path d="M0 200 C200 150 400 260 600 200 C800 140 1000 260 1200 200 C1400 140 1600 260 1800 200" stroke="url(#g1)" stroke-width="2" fill="none"/>
+    </svg>
+  </div>
+
+  <div class="container" style="position:relative;z-index:2">
+    <header>
+      <div class="brand">
+        <div class="logo">RP</div>
+        <div>
+          <div style="font-weight:700">Ria Pandey</div>
+          <div style="font-size:.9rem;color:var(--muted)">Machine Learning • NLP • Generative AI</div>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-    </div>
-    <div class="header__text-box row">
-      <div class="header__text">
-        <!-- Profile Image Section -->
-        <div class="profile-image">
-          <img src="WhatsApp Image 2025-03-31 at 15.48.35_7fe64854.jpg" alt="Ria Pandey">
+      <!-- <div class="links">
+        <a class="link-ghost" href="https://github.com/riapandey05" target="_blank">GitHub</a>
+        <a class="btn-primary" href="#contact">Get in touch</a>
+      </div> -->
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="intro">
+          <h1>Hi, I'm <span class="name-gradient">Ria Pandey</span></h1>
+          <div class="tagline">I build production-ready systems — <span class="typing" id="typing">Multilingual Voice Form Assistant</span><span class="typing-caret"></span></div>
+          <p class="muted" style="text-align:justify"> Born and brought up in Raipur, Chhattisgarh, I am proficient in programming languages like C++ and Python, relational databases like MySql. I'm passionate about finding patterns in data and love to build systems using machine learning and natural language processing. I believe in continuous learning and hence I'm exploring Agentic AI to expand my skillset.</p>
+
+          <div class="badges">
+            <div class="badge">Python</div>
+            <div class="badge">Transformers</div>
+            <div class="badge">LangChain</div>
+            <div class="badge">Streamlit</div>
+            <div class="badge">TensorFlow</div>
+          </div>
+
+          <div class="cta-row">
+            <a class="btn-primary" href="./Ria Pandey Resume (2).pdf" target="_blank">Download Resume</a>
+            <a class="btn-primary" href="#projects">See Projects</a>
+          </div>
         </div>
-    
-        <h1 class="heading-primary">
-          <span>Ria Pandey</span>
-        </h1>
-        <p>Machine Learning enthusiast</p>
-        <a href="#contact" class="btn btn--pink">Get in touch</a>
-      </div>
-    </div>
-    
-    <style>
-      .profile-image {
-        display: flex;
-        
-        align-items: center;
-        margin-bottom: 15px;
-      }
-    
-      .profile-image img {
-        width: 200px; /* Adjust size as needed */
-        height: 200px; /* Adjust size as needed */
-        margin-right: 20px; /* Space between image and text */
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid #ff3258; /* Optional: Adds a border */
-      }
-    </style>
 
-  </header>
+        <aside class="profile-card">
+          <!-- PROFILE IMAGE SPACE (always visible even if no img uploaded) -->
+          <div style="width:100%;height:260px;border-radius:8px;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:1rem">
+            <img src="./me.jpeg" alt="Ria Pandey — portrait" style="width:100%;height:100%;object-fit:cover;object-position:top center"/>
+          </div>
+          <div class="profile-meta">
+            <div>
+              <div style="font-weight:700">VIT Bhopal University</div>
+              <div class="muted">B.Tech — CSE (2022–2026)</div>
+            </div>
+            <div class="right">
+              <div style="font-weight:700">CGPA</div>
+              <div style="font-size:1.2rem;color:#fff">9.13</div>
+      </section>
 
-  <main role="main">
-
-    <!-- ***** Work ***** -->
-
-    <section class="work" id="work">
-       <!-- ***** About Myself ***** -->
-
-<!-- ***** About Myself ***** -->
-
-<section class="about-myself" id="about-myself">
-  <div class="row">
-    <h2>About Myself</h2>
-    <div class="about-myself__content">
-      <div class="about-myself__text">
-        <p>
-          I am a passionate Machine Learning enthusiast with a strong interest in Deep Learning and Natural Language Processing.
-          My journey in technology has led me to work on various projects, ranging from predictive analytics to sentiment analysis.
-          I thrive on solving complex problems and continuously improving my skills in the ever-evolving tech landscape.
-        </p>
-        <p>
-          I believe in lifelong learning and enjoy collaborating on innovative projects that make an impact. 
-          When I'm not coding, I love exploring new technologies, reading research papers, and enhancing my knowledge in AI-driven solutions.
-        </p>
-        <a href="22BCE10466.RESUME.pdf" target="_blank" class="btn btn--pink">Download Resume</a>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="client" id="clients">
-  <div class="row">
-    <h2>Skills</h2>
-    <div class="client__logos">
-      <!-- Add logos of the clients or companies you'have worked with. -->
-      <img src="./images/ronjones.png" class="client__logo" alt="Company 2" />
-      <img src="./images/goldengrid.png" class="client__logo" alt="Company 3" />
-      <img src="./images/bullseye.png" class="client__logo" alt="Company 1" />
-      <img src="./images/mighty-furnitures.png" class="client__logo" alt="Company 1" />
-      <img src="./images/fastlane.png" class="client__logo" alt="Company 3" />
-      <img src="./images/chippy.png" class="client__logo" alt="Company 1" />
-    </div>
-  </div>
-</section>
-
-
-
-
-      <div class="row">
+      <!-- Projects -->
+      <section id="projects">
         <h2>Projects</h2>
-        <div class="work__boxes">
-
-          <!-- Each div with the work__box class is a project. -->
-  
-          <div class="work__box">
-            <div class="work__text">
-              <h3>Forest fire prediction system</h3>
-              <p>
-                A forest fire prediction system using machine learning is a system that uses various machine learning algorithms 
-                to analyze data related to weather to predict the likelihood of a forest fire in a specific area. The system can help in early detection and prevention of forest fires, ultimately reducing their impact on the environment and human life.
-              </p>
-              <ul class="work__list">
-                <li>Random Forest</li>
-                <li>Streamlit</li>
-                <li>Accuracy:81%</li>
-                <li>etc</li>
-              </ul>
-
-              <div class="work__links">
-                <a href="https://github.com/riapandey05/forest.git" target="_blank" class="link__text">
-                  Visit Site <span>&rarr;</span>
-                </a>
-                <a href="https://github.com/riapandey05/NLP.git" title="View Source Code" target="_blank">
-                  <img src="image copy.png" class="work__code" alt="GitHub">
-                </a>
+        <div class="glass">
+          <div class="projects">
+            <article class="project">
+              <div class="left">
+                <h3>Voice-Activated Form Assistant for Banking</h3>
+                <p class="muted" style="text-align:justify">Multilingual speech-to-structured-data pipeline using DistilBERT for entity classification, Hugging Face, Regex-driven extraction and Streamlit deployment. Beta-tested with 500+ users — F1 &gt; 0.98.</p>
+                <div class="meta">
+                  <span class="pill">Python</span>
+                  <span class="pill">Hugging Face</span>
+                  <span class="pill">Streamlit</span>
+                </div>
               </div>
-            </div>
-            <div class="work__image-box">
-              <img src="image.png" class="work__image" alt="Project 1" />
-            </div>
-          </div>
-
-          <div class="work__box">
-            <div class="work__text">
-              <h3>Sentiment Analysis </h3>
-              <p>
-                A sentiment analysis system using machine learning is a system that uses Naive Bayes classifier to analyze text data and
-                 determine the sentiment or emotion expressed in the text. The system can be used to analyze customer feedback, social media
-                 posts, and other types of text data to gain insights into public opinion and sentiment.
-              </p>
-              <ul class="work__list">
-                <li>Naive Bayes</li>
-                <li>etc</li>
-                <li>etc</li>
-                <li>etc</li>
-              </ul>
-
-              <div class="work__links">
-                <a href="#" class="link__text">
-                  Visit Site <span>&rarr;</span>
-                </a>
-                <a href="#">
-                  <img src="image copy.png" class="work__code" title="View Source Code" alt="GitHub">
-                </a>
+              <div class="media media-vafa">
+                <div class="form-lines">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div class="mic-dot"></div>
+                <div class="mic-stick"></div>
               </div>
-            </div>
-            <div class="work__image-box">
-              <img src="WhatsApp Image 2025-03-31 at 16.08.59_e910cee9.jpg" class="work__image" alt="Project 1" />
-            </div>
-          </div>
+            </article>
 
-          <div class="work__box">
-            <div class="work__text">
-              <h3>Loyalty Lens</h3>
-              <p>
-            Churn classification is a process of identifying customers who are likely to stop using a product or service.
-            It involves analyzing customer data and behavior to predict which customers are at risk of churning. By identifying these customers, businesses can take proactive measures to retain them, such as offering incentives or improving customer service.
-              </p>
-              <ul class="work__list">
-                <li>React</li>
-                <li>Next.js</li>
-                <li>Node</li>
-                <li>MongoDB</li>
-              </ul>
-
-              <div class="work__links">
-                <a href="#" class="link__text">
-                  Visit Site <span>&rarr;</span>
-                </a>
-                <a href="#">
-                  <img src="./images/github.svg" class="work__code" title="View Source Code" alt="GitHub">
-                </a>
+            <article class="project">
+              <div class="left">
+                <h3>ConversoAI — Chatbot With Conversation Memory</h3>
+                <p class="muted" style="text-align:justify">LangChain-based conversational agent with long-term memory and vector retrieval. Reduced repetitive responses by ~30% and improves context retention across multi-turn dialogues.</p>
+                <div class="meta">
+                  <span class="pill">LangChain</span>
+                  <span class="pill">Embeddings</span>
+                  <span class="pill">Hugging Face</span>
+                </div>
               </div>
-            </div>
-            <div class="work__image-box">
-              <img src="./images/project-3.png" class="work__image" alt="Project 3" />
-            </div>
+              <div class="media media-converso">
+                <div class="bubble user">Hi, can you help?</div>
+                <div class="bubble bot">Of course, I remember our last chat.</div>
+                <div class="typing-dots">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project">
+              <div class="left">
+                <h3>LSTMind — Next Word Predictor</h3>
+                <p class="muted" style="text-align:justify">LSTM-based language model trained on Shakespeare dataset. Deployed via Streamlit; live prediction interface and sequence preprocessing pipeline with early stopping to control overfitting.</p>
+                <div class="meta">
+                  <span class="pill">TensorFlow</span>
+                  <span class="pill">Keras</span>
+                </div>
+              </div>
+              <div class="media media-lstmind">
+                <div class="token-row">
+                  <div class="token">to</div>
+                  <div class="token">be</div>
+                  <div class="token">or</div>
+                  <div class="token next">not</div>
+                  <div class="token">to</div>
+                </div>
+                <div class="token-row">
+                  <div class="token">shall</div>
+                  <div class="token">I</div>
+                  <div class="token next">compare</div>
+                  <div class="token">thee</div>
+                </div>
+                <div class="token-row">
+                  <div class="token">if</div>
+                  <div class="token">music</div>
+                  <div class="token">be</div>
+                  <div class="token next">the</div>
+                  <div class="token">food</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="project">
+              <div class="left">
+                <h3>Forest Fire Prediction System</h3>
+                <p class="muted" style="text-align:justify">Random Forest model to predict fire risk from weather data — production-ready Streamlit dashboard with 81% accuracy and explanation plots for feature importance.</p>
+                <div class="meta">
+                  <span class="pill">Random Forest</span>
+                  <span class="pill">Streamlit</span>
+                </div>
+              </div>
+              <div class="media media-forest">
+                <div class="heat"></div>
+                <div class="bars">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
+              </div>
+            </article>
+
+           <article class="project" style="text-align:justify;">
+  <div class="left">
+    <h3>LoyaltyLens — Customer Churn Prediction</h3>
+    <p class="muted" style="text-align:justify;">
+      Deep learning-based churn classifier built with TensorFlow/Keras using gender encoding, geography one-hot encoding, and standardized features. Integrated real-time user inputs in Streamlit and loaded trained pipelines using Pickle for instant inference. Achieved ~85% accuracy and deployed publicly on Streamlit Cloud.
+    </p>
+    <div class="meta">
+      <span class="pill">TensorFlow</span>
+      <span class="pill">Keras</span>
+      <span class="pill">Streamlit</span>
+      <span class="pill">Pickle</span>
+    </div>
+  </div>
+
+  <div class="media" style="
+    background:radial-gradient(circle at 50% 50%, #00e5ff22, transparent 60%), #050712;
+    position:relative;
+    overflow:hidden;
+    width:160px;
+    height:100px;
+    border-radius:8px;
+  ">
+
+    <div style="
+      position:absolute;
+      left:15%;
+      right:15%;
+      bottom:20%;
+      height:10px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.08);
+      overflow:hidden;
+    ">
+      <div style="
+        height:100%;
+        width:60%;
+        border-radius:999px;
+        background:linear-gradient(90deg,#00e5ff,#ff3b78);
+        animation:riskFill 3.8s ease-in-out infinite;
+        transform-origin:left;
+      "></div>
+    </div>
+
+    <div style="
+      position:absolute;
+      top:18%;
+      left:50%;
+      transform:translateX(-50%);
+      font-size:14px;
+      font-weight:700;
+      color:#e8eef6;
+      opacity:0.8;
+      animation:probChange 3.8s ease-in-out infinite;
+    ">82%</div>
+
+    <div style="
+      position:absolute;
+      width:18px;
+      height:18px;
+      border-radius:50%;
+      bottom:40%;
+      right:18%;
+      background:radial-gradient(circle,#00e5ff,#004b55);
+      box-shadow:0 0 14px rgba(0,229,255,0.9);
+      animation:pulseDot 1.7s ease-out infinite;
+    "></div>
+
+  </div>
+</article>
+
+
+
           </div>
         </div>
+      </section>
+      <!-- Skills -->
+<section id="skills">
+  <h2>Skills & Tools</h2>
+  <div class="glass">
+    <div class="skills-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem">
+
+      <div class="skill">
+        <h4>Machine Learning</h4>
+        <div class="bar"><i style="width:88%"></i></div>
+        <div class="muted" style="margin-top:.6rem">Scikit-Learn, model selection, evaluation</div>
       </div>
-    </section>
 
-    <!-- ***** Clients ***** -->
-
-
-
-    <!-- ***** About ***** -->
-
-    <section class="about" id="about">
-      <div class="row">
-        <h2>Education</h2>
-        <div style="display: flex; justify-content: space-between; align-items: center;  padding: 20px; border-radius: 8px;">
-          <!-- School Section (Left) -->
-          <div style="width: 45%; text-align: left;">
-            <h3 style="color: #e63946;">Undergraduation</h3>
-            <p><strong>Rajkumar College ,Raipur(Chhattisgarh)</strong></p>
-            <p>Secondary(2020): <strong>94%</strong></p>
-            <p>Higher Secondary(2022): <strong>95%</strong></p>
-          </div>
-          
-          <!-- College Section (Right) -->
-          <div style="width: 45%; text-align: right;">
-            <h3 style="color: #e63946;">Graduation</h3>
-            <p><strong>VIT Bhopal University</strong></p>
-            <p>Degree: <strong>B.Tech in CSE</strong></p>
-            <p>CGPA: <strong>9.12</strong> (Expected 2026)</p>
-          </div>
-        </div>
-        </div>
+      <div class="skill">
+        <h4>Deep Learning</h4>
+        <div class="bar"><i style="width:78%"></i></div>
+        <div class="muted" style="margin-top:.6rem">TensorFlow, Keras</div>
       </div>
-    </section>
-    
 
-        
+      <div class="skill">
+        <h4>NLP & Transformers</h4>
+        <div class="bar"><i style="width:86%"></i></div>
+        <div class="muted" style="margin-top:.6rem">Hugging Face, tokenization, embedding</div>
+      </div>
 
-          <div class="about__photo-container">
-            <!-- Add a nice photo of yourself -->
-            <img class="about__photo" src="./images/syed-ali-hussnain.jpg" alt="" />
+      <div class="skill">
+        <h4>Generative AI & LangChain</h4>
+        <div class="bar"><i style="width:72%"></i></div>
+        <div class="muted" style="margin-top:.6rem">RAG, prompt engineering, memory</div>
+      </div>
+
+      <div class="skill">
+        <h4>Programming Languages</h4>
+        <div class="bar"><i style="width:90%"></i></div>
+        <div class="muted" style="margin-top:.6rem">Python, C++ (including DSA in C++)</div>
+      </div>
+
+      <div class="skill">
+        <h4>Relational Databases</h4>
+        <div class="bar"><i style="width:70%"></i></div>
+        <div class="muted" style="margin-top:.6rem">MySQL — schema design, queries, optimization</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+      <!-- Education -->
+      <section id="education">
+        <h2>Education & Achievements</h2>
+        <div class="glass" style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap">
+          <div style="flex:1;min-width:260px">
+            <h3 style="margin-bottom:.4rem">VIT Bhopal University</h3>
+            <p class="muted">B.Tech in Computer Science & Engineering — CGPA: 9.13 (2022–2026)</p>
+            <h4 style="margin-top:1rem">Rajkumar College (12th)</h4>
+            <p class="muted">Higher Secondary — 95% (2022)</p>
+            <h4 style="margin-top:1rem">Rajkumar College (10th)</h4>
+            <p class="muted">Senior Secondary — 93% (2020)</p>
+          </div>
+          <div style="flex:1;min-width:260px">
+            <h3 style="margin-bottom:.4rem">Achievements</h3>
+            <ul class="muted" style="line-height:1.8">
+              <li>Silver + Elite certificate in NPTEL Cloud Computing (IIT Madras)</li>
+              <li>1st in State & 4th National in All-India Spell-Quest</li>
+              <li>Completed 160-day coding challenge on GeeksForGeeks</li>
+              <li>District topper in CISCE 12th Board examination</li>
+            </ul>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <!-- ***** Contact ***** -->
+      <!-- Contact -->
+      <section id="contact">
+  <h2>Get in touch</h2>
 
-  <section class="contact" id="contact">
-    <div class="row">
-      <h2>Get in Touch</h2>
-      <div class="contact__info">
-        <p>
-          I am a student at VIT Bhopal University, deeply passionate about Machine Learning,
-          Deep Learning, and Natural Language Processing. I am always eager to explore new 
-          technologies and collaborate on innovative projects. If you’d like to connect or
-          discuss exciting ideas, feel free to reach out to me at this email.
-        </p>
-        <!-- Replace the email with yours -->
-        <a href="mailto:riapandey0805@gmail.com" class="btn">riapandey0805@gmail.com</a>
+  <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;justify-content:space-between;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:1.5rem">
+
+    <!-- LEFT SIDE -->
+    <div style="flex:1;min-width:260px;">
+      <p class="muted" style="text-align:justify;">I’m open to internships and collaboration on ML/AI projects. Reach out for full project links, code walkthroughs, or research ideas.</p>
+
+      <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
+        <a class="btn-primary" href="mailto:riapandey0805@gmail.com">riapandey0805@gmail.com</a>
+        <a class="btn-primary" href="https://www.linkedin.com/in/ria-pandey-07b4a2250/" target="_blank">LinkedIn</a>
+        <a class="btn-primary" href="https://github.com/riapandey05" target="_blank">GitHub</a>
       </div>
     </div>
-  </section>
 
-  <!-- ***** Footer ***** -->
+    <!-- RIGHT SIDE -->
+    <div style="flex:1;min-width:260px;display:flex;flex-direction:column;align-items:flex-end;">
+      <!-- <p class="muted" style="margin-bottom:.6rem;text-align:center;width:100%;">Quick contact card</p> -->
 
-  <footer role="contentinfo" class="footer">
-    <div class="row">
-      <!-- Update the links to point to your accounts -->
-      <ul class="footer__social-links">
-        <li class="footer__social-link-item">
-          <a href="https://www.geeksforgeeks.org/user/riapandhc2q/" title="Link to GeeksForGeeks Profile">
-            <img src="images/image.png" class="footer__social-image" alt="GeeksForGeeks">
-          </a>
-        </li>
-        <li class="footer__social-link-item">
-          <a href="https://github.com/riapandey05" title="Link to Github Profile">
-            <img src="image copy.png" class="footer__social-image" alt="Github">
-          </a>
-        </li>
-        <li class="footer__social-link-item">
-          <a href="https://www.linkedin.com/in/ria-pandey-07b4a2250/" title="Link to Linkedin Profile">
-            <img src="images/image copy.png" class="footer__social-image" alt="LinkedIn">
-          </a>
-        </li>
-        <li class="footer__social-link-item">
-          <a href=https://leetcode.com/u/_riapandey_/">
-            <img src="image copy 2.png" title="Link to Leetcode Profile" class="footer__social-image" alt="Leetcode">
-          </a>
-        </li>
-      </ul>
+      <div style="border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.02);padding:1rem;width:80%;">
 
-      <!-- If you give me some credit by keeping the below paragraph, will be huge for me 😊 Thanks. -->
-      <p>
-       Thank you</a>
-      </p>
-      <div class="footer__github-buttons">
-        <iframe
-          src="https://ghbtns.com/github-btn.html?user=nisarhassan12&repo=portfolio-template&type=watch&count=true"
-          frameborder="0" scrolling="0" width="170" height="20" title="Watch Portfolio Template on GitHub">
-        </iframe>
+        <div style="font-weight:700;text-align:left;">Ria Pandey</div>
+        <div class="muted" style="text-align:left;">+91-62631-46230</div>
+
+        <div style="margin-top:.6rem;text-align:left;color:#bfc7d4;font-size:.9rem;">
+          Leave a message or feedback anytime — I'd love to hear your suggestions!
+        </div>
+
       </div>
     </div>
-  </footer>
 
-  <a href="#top" class="back-to-top" title="Back to Top">
-    <img src="./images/arrow-up.svg" alt="Back to Top" class="back-to-top__image"/>
-  </a>
-  <script src="./index.js"></script>
+  </div>
+</section>
+
+    </main>
+
+    <footer>
+      Built by -- Ria Pandey
+    </footer>
+  </div>
+
+  <script>
+    // -------------------- Typing animation (rotates project highlights) --------------------
+    (function(){
+      const items = [
+        'Multilingual Voice Form Assistant',
+        'LangChain Conversational Agent',
+        'LSTM Next-Word Predictor',
+        'Forest Fire Prediction System',
+        'Customer Churn Prediction System'
+      ];
+      let i=0;const el=document.getElementById('typing');
+      function rotate(){
+        el.textContent=''+items[i%items.length];
+        i++;
+      }
+      rotate();
+      setInterval(rotate,3000);
+    })();
+  </script>
 </body>
-
 </html>
